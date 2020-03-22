@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        serviceName: myprefix-${spring.application.name}
+#        health-check-path: ${management.server.servlet.context-path}/health
+        health-check-interval: 20s
+        health-check-path: /test/health
+        prefer-ip-address: true
+        ip-address: 127.0.0.1
+  application:
+    name: cloud-consul-demo
+
+management:
+#  endpoints:
+#    web:
+#      base-path: /manage
+server:
+  port: 4453
+
+#  servlet:
+#    context-path: /admin
+#    servlet:
+#      context-path: /admin
